@@ -1,47 +1,10 @@
 const {ApolloServer, gql} = require('apollo-server');
+const {images} = require('./data/images');
+const {categories} = require('./data/categories');
+const {products} = require('./data/products');
 
-const products = [
-  {
-    name: 'Harry Potter and the Chamber of Secrets',
-    description: 'J.K. Rowling',
-    categoryId: 'cat1',
-    rating: 4.5,
-    price: 10000,
-    colors: ['Pink', 'White'],
-    imageIds: [1],
-  },
-  {
-    name: 'Jurassic Park',
-    description: 'Michael Crichton',
-    categoryId: 'cat2',
-    colors: ['Pink', 'Orange'],
-    price: 14000,
-    rating: 5,
-    imageIds: [1, 2],
-  },
-];
-
-const categories = {
-  cat1: {
-    id: 'cat1',
-    name: 'Cat 1',
-  },
-  cat2: {
-    id: 'cat2',
-    name: 'Cat 2',
-  },
-};
-
-const images = {
-  1: {
-    url: 'https://placeimg.com/640/480/people',
-    alt: 'alt',
-  },
-  2: {
-    url: 'https://placeimg.com/640/480/people',
-    alt: 'alt',
-  },
-};
+const carts = {};
+const orders = {};
 
 const typeDefs = gql`
   enum Color {
@@ -98,6 +61,15 @@ const typeDefs = gql`
     name: String
   }
 
+  type CartItem {
+    product: Product
+    quantity: Int
+  }
+
+  type Cart {
+    items: [CartItem!]!
+  }
+
   type Query {
     products(
       categoryId: ID
@@ -106,6 +78,23 @@ const typeDefs = gql`
       pagination: Pagination
       sort: Sort
     ): [Product]
+
+    cart: Cart!
+  }
+
+  type UserError {
+    field: String
+    message: String!
+  }
+
+  type APIResponse {
+    success: Boolean!
+    userErrors: [UserError!]!
+  }
+
+  type Mutation {
+    putCart(productId: ID!, quantity: Int!): APIResponse
+    checkout: APIResponse
   }
 `;
 
@@ -161,6 +150,21 @@ const resolvers = {
 
       return filteredProducts.slice(page * perpage, (page + 1) * perpage);
     },
+    cart: (_parent, _args, {userId}) => {
+      if (userId === UNAUTHORIZED_ID) {
+        return {items: []};
+      }
+
+      console.log('carts', carts);
+      return carts[userId] || {items: []};
+    },
+  },
+
+  CartItem: {
+    product: ({productId}) => {
+      console.log('hehre');
+      return products.find((product) => product.id === productId);
+    },
   },
 
   Product: {
@@ -168,11 +172,96 @@ const resolvers = {
       (product.imageIds || ids).map((id) => images[id]),
     category: (product, {id}) => categories[product.categoryId || id],
   },
+
+  Mutation: {
+    putCart(_root, {productId, quantity}, {userId}) {
+      if (userId === UNAUTHORIZED_ID) {
+        return {
+          success: false,
+          userErrors: [
+            {
+              message: 'Please use authorization header to call API!',
+            },
+          ],
+        };
+      }
+
+      if (quantity <= 0) {
+        return {
+          success: false,
+          userErrors: [
+            {
+              field: 'quantity',
+              message: 'Quantity must be greater than 0!',
+            },
+          ],
+        };
+      }
+
+      const userCart = carts[userId] || {items: []};
+      carts[userId] = userCart;
+      let added = false;
+
+      userCart.items = userCart.items.map((cartItem) => {
+        if (cartItem.productId === productId) {
+          added = true;
+          return {
+            productId,
+            quantity,
+          };
+        }
+
+        return cartItem;
+      });
+
+      if (!added) {
+        userCart.items.push({
+          productId,
+          quantity,
+        });
+      }
+
+      return {
+        success: true,
+        userErrors: [],
+      };
+    },
+
+    checkout(_root, _args, {userId}) {
+      const cart = carts[userId];
+      if (!cart) {
+        return {
+          success: false,
+          userErrors: [
+            {
+              message: 'Please add some items to cart',
+            },
+          ],
+        };
+      }
+
+      orders[userId] = carts[userId];
+      carts[userId] = null;
+
+      return {
+        success: true,
+        userErrors: [
+          {
+            message: 'Thank you for your order!',
+          },
+        ],
+      };
+    },
+  },
 };
 
+const UNAUTHORIZED_ID = 'unauthorized';
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({req}) => ({
+    userId: req.headers.authorization || UNAUTHORIZED_ID,
+  }),
   // mocks: true,
   introspection: true,
   playground: true,
