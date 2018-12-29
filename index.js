@@ -119,7 +119,7 @@ const resolvers = {
         );
       }
 
-      if (sizes) {
+      if (sizes && sizes.length > 0) {
         let sizeSet = new Set(sizes);
         filteredProducts = filteredProducts.filter(product =>
           product.sizes.some(size => sizeSet.has(size))
