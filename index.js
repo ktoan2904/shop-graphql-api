@@ -21,8 +21,9 @@ const typeDefs = gql`
   }
 
   enum SortField {
-    Price
-    Name
+    price
+    name
+    default
   }
 
   enum SortDirection {
@@ -108,30 +109,32 @@ const resolvers = {
       let filteredProducts = products;
 
       if (id) {
-        filteredProducts = products.filter(product => product.id === id);
+        filteredProducts = filteredProducts.filter(
+          product => product.id === id
+        );
       }
       if (categoryId) {
-        filteredProducts = products.filter(
+        filteredProducts = filteredProducts.filter(
           product => product.categoryId === categoryId
         );
       }
 
       if (sizes) {
         let sizeSet = new Set(sizes);
-        filteredProducts = products.filter(product =>
+        filteredProducts = filteredProducts.filter(product =>
           product.sizes.some(size => sizeSet.has(size))
         );
       }
 
       if (priceRange) {
         if (priceRange.min) {
-          filteredProducts = products.filter(
+          filteredProducts = filteredProducts.filter(
             product => product.price >= priceRange.min
           );
         }
 
         if (priceRange.max) {
-          filteredProducts = products.filter(
+          filteredProducts = filteredProducts.filter(
             product => product.price <= priceRange.max
           );
         }
@@ -142,16 +145,22 @@ const resolvers = {
 
       if (sort) {
         direction = sort.direction === "ASC" ? 1 : -1;
-        if (sort.field === "Price") {
+        if (sort.field === "price") {
           filteredProducts = filteredProducts.sort(
             (a, b) =>
               direction * (a.price > b.price ? 1 : a.price < b.price ? -1 : 0)
           );
-        } else if (sort.field === "Name") {
+        } else if (sort.field === "name") {
           filteredProducts = filteredProducts.sort(
             (a, b) =>
               direction * (a.name > b.name ? 1 : a.name < b.name ? -1 : 0)
           );
+        } else {
+          filteredProducts = filteredProducts.sort((a, b) => {
+            const aId = parseInt(a.id.slice(1));
+            const bId = parseInt(b.id.slice(1));
+            return direction * (aId - bId);
+          });
         }
       }
 
