@@ -122,6 +122,7 @@ const typeDefs = gql`
   type Mutation {
     putCart(productId: ID!, quantity: Int!): APIResponse
     checkout: APIResponse
+    login(userId: String!, password: String!): LoginPayload
   }
 `;
 
