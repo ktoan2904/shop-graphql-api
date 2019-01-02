@@ -6,6 +6,7 @@ const products = [
       "Floral print sleeveless wide leg jumpsuit with waist tie detail",
     categoryId: "c2",
     price: 17.9,
+    rating: 2,
     sizes: ["XS", "S"],
     imageIds: ["1a", "1b", "1c"]
   },
@@ -16,6 +17,7 @@ const products = [
       "Polyester jumpsuit with classic, regular fit, featuring an open back with strappy details",
     categoryId: "c2",
     price: 59,
+    rating: 4,
     sizes: ["S", "M", "L"],
     imageIds: ["2a", "2b", "2c"]
   },
@@ -26,6 +28,7 @@ const products = [
       "Mesh top panel bodycon denim dress with round neckline - Slim fit",
     categoryId: "c2",
     price: 160.9,
+    rating: 3.5,
     sizes: ["M", "L", "XL"],
     imageIds: ["3a", "3b", "3c"]
   },
@@ -35,6 +38,7 @@ const products = [
     description: "Graphic sleeveless tee with round neckline - Relaxed fit",
     categoryId: "c2",
     price: 29.4,
+    rating: 3.5,
     sizes: ["XS", "S", "M", "L", "XL"],
     imageIds: ["4a", "4b", "4c"]
   },
@@ -45,6 +49,7 @@ const products = [
       "Decorative button front skirt- Mid rise, unlined, regular fit",
     categoryId: "c2",
     price: 22.9,
+    rating: 5,
     sizes: ["S"],
     imageIds: ["5a", "5b", "5c"]
   },
@@ -55,6 +60,7 @@ const products = [
       "Solid hue crepe wrap bodysuit - V-neckline and front & hem button fastening",
     categoryId: "c2",
     price: 20.9,
+    rating: 3.5,
     sizes: ["M", "L"],
     imageIds: ["6a", "6b", "6c"]
   },
@@ -64,6 +70,7 @@ const products = [
     description: "Solid shade openwork longline knitted cardigan",
     categoryId: "c2",
     price: 29.9,
+    rating: 4,
     sizes: ["XL"],
     imageIds: ["7a", "7b", "7c"]
   },
@@ -74,6 +81,7 @@ const products = [
       "Textured ruffle short sleeve top- Round neckline with cutout detail",
     categoryId: "c2",
     price: 25.9,
+    rating: 4.5,
     sizes: ["S", "M", "L", "XL"],
     imageIds: ["8a", "8b", "8c"]
   },
@@ -83,6 +91,7 @@ const products = [
     description: "Solid toned wrap skirt - Unlined, mid rise, regular fit",
     categoryId: "c2",
     price: 29.9,
+    rating: 2.5,
     sizes: ["XS", "S", "M"],
     imageIds: ["9a", "9b", "9c"]
   },
@@ -92,6 +101,7 @@ const products = [
     description: "Cape sleeves blazer- Open front, lined, regular fit",
     categoryId: "c2",
     price: 90.9,
+    rating: 4,
     sizes: ["XS", "S", "M", "L"],
     imageIds: ["10a", "10b", "10c"]
   },
@@ -101,6 +111,7 @@ const products = [
     description: "Textured bodycon dress - Bardot neckline with notch detail",
     categoryId: "c2",
     price: 73.9,
+    rating: 5,
     sizes: ["M", "L", "XL"],
     imageIds: ["11a", "11b", "11c"]
   },
@@ -110,6 +121,7 @@ const products = [
     description: "Solid shade smocked skater dress - Lined, scoop neckline",
     categoryId: "c2",
     price: 66.9,
+    rating: 3,
     sizes: ["XS", "S"],
     imageIds: ["12a", "12b", "12c"]
   },
@@ -119,6 +131,7 @@ const products = [
     description: "Casual tee with brand logo - Round neckline, slim fit",
     categoryId: "c1",
     price: 110.9,
+    rating: 3.5,
     sizes: ["S", "M", "L"],
     imageIds: ["13a", "13b", "13c"]
   },
@@ -129,6 +142,7 @@ const products = [
       "Training T-shirt with anti-odor technology and distraction-free comfort",
     categoryId: "c1",
     price: 15.6,
+    rating: 5,
     sizes: ["XS"],
     imageIds: ["14a", "14b", "14c"]
   },
@@ -138,6 +152,7 @@ const products = [
     description: "Faded denim jeans - Mid rise, unlined, slim fit",
     categoryId: "c1",
     price: 26.9,
+    rating: 2,
     sizes: ["L", "XL"],
     imageIds: ["15a", "15b", "15c"]
   },
@@ -148,6 +163,7 @@ const products = [
       "Insanely comfortable, this t-shirt is a definite must have for training junkies out there",
     categoryId: "c1",
     price: 36.9,
+    rating: 4,
     sizes: ["M", "L"],
     imageIds: ["16a", "16b", "16c"]
   },
@@ -158,6 +174,7 @@ const products = [
       "Contrast panel hoodie with brand patch detail- Hooded neckline, unlined, regular fit",
     categoryId: "c1",
     price: 107.9,
+    rating: 3,
     sizes: ["XS", "S", "M", "L"],
     imageIds: ["17a", "17b", "17c"]
   },
@@ -168,6 +185,7 @@ const products = [
       "Solid toned shorts with embroidered details - Mid rise, regular fit",
     categoryId: "c1",
     price: 54.0,
+    rating: 3.5,
     sizes: ["S", "M"],
     imageIds: ["18a", "18b", "18c"]
   },
@@ -178,6 +196,7 @@ const products = [
       "Melange polo shirt with tipping detail - Collared neckline, unlined, regular fit",
     categoryId: "c1",
     price: 63.9,
+    rating: 4.5,
     sizes: ["L"],
     imageIds: ["19a", "19b", "19c"]
   },
@@ -187,6 +206,7 @@ const products = [
     description: "Monochrome button-up shirt - Collared neckline, regular fit",
     categoryId: "c1",
     price: 142.9,
+    rating: 3.5,
     sizes: ["L", "XL"],
     imageIds: ["20a", "20b", "20c"]
   },
@@ -197,6 +217,7 @@ const products = [
       "Denim solid tone long sleeves shirt - Mandarin collar neckline, slim fit",
     categoryId: "c1",
     price: 34.9,
+    rating: 4,
     sizes: ["XS", "S"],
     imageIds: ["21a", "21b", "21c"]
   },
@@ -207,6 +228,7 @@ const products = [
       "Solid tone quilted inner jacket with faux fur hood - Hood neckline, lined, regular fit",
     categoryId: "c1",
     price: 214.9,
+    rating: 4.5,
     sizes: ["XS", "S", "M"],
     imageIds: ["22a", "22b", "22c"]
   },
@@ -217,6 +239,7 @@ const products = [
       "Gradient floral print short sleeve T-shirt - Crew neckline, unlined, regular fit",
     categoryId: "c1",
     price: 36.9,
+    rating: 2.5,
     sizes: ["S", "M", "L"],
     imageIds: ["23a", "23b", "23c"]
   },
@@ -227,6 +250,7 @@ const products = [
       "Solid shade military bomber jacket - Bound neckline, lined, regular fit",
     categoryId: "c1",
     price: 245.9,
+    rating: 3,
     sizes: ["XS", "S", "M", "L"],
     imageIds: ["24a", "24b", "24c"]
   },
@@ -237,6 +261,7 @@ const products = [
       "Swiss Quartz 3 Hands with Date, Stainless steel case, 2 years warranty",
     categoryId: "c3",
     price: 245.0,
+    rating: 3,
     sizes: ["M"],
     imageIds: ["25a", "25b", "25c"]
   },
@@ -247,6 +272,7 @@ const products = [
       "Featuring both classic and bright rubber fronts, metal temples and tone-on-tone temple tips",
     categoryId: "c3",
     price: 179.0,
+    rating: 4,
     sizes: ["M"],
     imageIds: ["26a", "26b", "26c"]
   },
@@ -256,6 +282,7 @@ const products = [
     description: "Quartz 2 Hands, Stainless steel case, 2 years warranty",
     categoryId: "c3",
     price: 70.0,
+    rating: 4.5,
     sizes: ["M"],
     imageIds: ["27a", "27b", "27c"]
   },
@@ -266,6 +293,7 @@ const products = [
       "Brass with 18K white gold plating, made with Swarovski Elements",
     categoryId: "c3",
     price: 38.95,
+    rating: 5,
     sizes: ["M"],
     imageIds: ["28a", "28b", "28c"]
   },
@@ -275,6 +303,7 @@ const products = [
     description: "Automatic 3 Hands 24 hours, Ionic plating - Rose gold case",
     categoryId: "c3",
     price: 155,
+    rating: 2,
     sizes: ["M"],
     imageIds: ["29a", "29b", "29c"]
   },
@@ -284,6 +313,7 @@ const products = [
     description: "Light tinted rectangle sunglasses with HDPolarized lenses",
     categoryId: "c3",
     price: 199,
+    rating: 3.5,
     sizes: ["M"],
     imageIds: ["30a", "30b", "30c"]
   },
@@ -293,6 +323,7 @@ const products = [
     description: "Reef textured leather wallet - Cowhide leather",
     categoryId: "c3",
     price: 109,
+    rating: 4,
     sizes: ["M"],
     imageIds: ["31a", "31b", "31c"]
   },
@@ -303,6 +334,7 @@ const products = [
       "Can be carried in two different ways: as a backpack and a shoulder bag",
     categoryId: "c3",
     price: 359,
+    rating: 3.5,
     sizes: ["M"],
     imageIds: ["32a", "32b", "32c"]
   }

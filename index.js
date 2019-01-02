@@ -68,6 +68,7 @@ const typeDefs = gql`
     description: String!
     category: Category
     price: Float
+    rating: Float
     sizes: [Size]
     images: [Image!]!
   }
