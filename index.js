@@ -223,7 +223,7 @@ const resolvers = {
 
   Mutation: {
     login: (_root, { userId, password }) => {
-      if (password === "password") {
+      if (userId !== "" && password === "password") {
         const expiredAt = new Date(
           new Date().getTime() + 24 * 60 * 60 * 1000
         ).toISOString();
